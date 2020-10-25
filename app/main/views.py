@@ -2,7 +2,6 @@ from flask import Flask, render_template, url_for, flash, redirect
 from . import main
 from .forms import RegistrationForm, LoginForm
 
-# app = Flask(__name__)
 
 
 
