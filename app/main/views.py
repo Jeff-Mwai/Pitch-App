@@ -1,6 +1,9 @@
 from flask import Flask, render_template, url_for, flash, redirect
 from . import main
 from .forms import RegistrationForm, LoginForm
+from ..models import User,Pitch
+from .. import db
+from flask_login import login_user,login_required, logout_user
 
 
 
@@ -14,10 +17,19 @@ def home():
 def about():
     return render_template('about.html', title = 'About')
 
+@main.route('/signout')
+@login_required
+def signout():
+    logout_user()
+    return redirect(url_for("main.home"))
+
 @main.route('/register', methods = ['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        user = User(username = form.username.data,email = form.email.data,password = form.password.data)
+        db.session.add(user)
+        db.session.commit()
         flash(f'Account created for { form.username.data }!','success')
         return redirect(url_for('.home'))
     return render_template('register.html', title = 'register', form = form)
@@ -26,12 +38,16 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'jeffreymwai4@gmail.com' and form.password.data == '1234':
+        user = User.query.filter_by(email = form.email.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user,form.remember.data)
             flash('You have been logged in successfully!', 'success')
             return redirect(url_for('.home'))
-        else:
-            flash('login unsuccessful. Please check your password or email', 'danger')
+    else:
+        flash('login unsuccessful. Please check your password or email', 'danger')
 
     return render_template('login.html', title = 'login', form = form)
+
+
 
 
