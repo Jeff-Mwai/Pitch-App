@@ -1,12 +1,27 @@
 {% extends 'base.html'%}
 
-
-
 {% block content %}
 
 {% for pitch in pitches %}
-<h1>{{pitch.category}}</h1>
-<p>{{pitch.title}}</p>
-<p>{{pitch.pitch_content}}</p>
+
+<div class="card card-cascade wider mt-5">
+    <div class="card-body card-body-cascade text-center">
+
+        <!-- Title -->
+        <h4 class="card-title"><strong>{{pitch.title}}</strong></h4>
+        <!-- Subtitle -->
+        <h6 class="font-weight-bold indigo-text py-2">{{pitch.pitch_content}}</h6>
+        <!-- Text -->
+
+        <!-- Comment button -->
+        <button type="button" class="btn btn-success">Comment</button>
+        <!-- Like Button -->
+        <button type="button" class="btn btn-primary">Like</button>
+        <!-- Dislike Button -->
+        <button type="button" class="btn btn-danger">Dislike</button>
+
+    </div>
+</div>
+
 {% endfor %}
 {% endblock %}
