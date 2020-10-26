@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, flash, redirect, abort, request
 from . import main
-from .forms import RegistrationForm, LoginForm, UpdateProfile, PitchForm
-from ..models import User,Pitch
+from .forms import RegistrationForm, LoginForm, UpdateProfile, PitchForm, CommentForm
+from ..models import User,Pitch, Comment
 from .. import db, photos
 from flask_login import login_user,login_required, logout_user, current_user
 
@@ -103,6 +103,21 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/comment/<int:pitch_id>', methods = ['POST','GET'])
+@login_required
+def comment(pitch_id):
+    form = CommentForm()
+    pitch = Pitch.query.get(pitch_id)
+    users_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
+    if form.validate_on_submit():
+        comment = form.comment.data 
+        pitch_id = pitch_id
+        user_id = current_user._get_current_object().id
+        new_comment = Comment(comment = comment,user_id = user_id,pitch_id = pitch_id)
+        new_comment.save_comment()
+        return redirect(url_for('.comment', pitch_id = pitch_id))
+    return render_template('comment.html', form =form, pitch = pitch,users_comments=users_comments)
 
 
 @main.route('/category/entertainment', methods=['POST','GET'])
