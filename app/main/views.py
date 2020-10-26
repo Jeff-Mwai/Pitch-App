@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, flash, redirect, abort
 from . import main
-from .forms import RegistrationForm, LoginForm, UpdateProfile
+from .forms import RegistrationForm, LoginForm, UpdateProfile, PitchForm
 from ..models import User,Pitch
 from .. import db, photos
 from flask_login import login_user,login_required, logout_user, current_user
@@ -34,6 +34,22 @@ def register():
         flash(f'Account created for { form.username.data }!','success')
         return redirect(url_for('.home'))
     return render_template('register.html', title = 'register', form = form)
+
+
+@main.route('/new_pitch', methods = ['GET','POST'])
+@login_required
+def new_pitch():
+    form = PitchForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        pitch_content = form.post.data
+        category = form.category.data
+        user_id = current_user
+        new_pitch_item = Pitch(pitch_content=pitch_content,user_id=current_user._get_current_object().id,category=category,title=title)
+        new_pitch_item.save_pitch()
+        return redirect(url_for('main.home'))
+        
+    return render_template('pitch.html', form = form)
 
 @main.route('/login' , methods = ['GET', 'POST'])
 def login():
@@ -88,6 +104,7 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
     
+
 
 
 
