@@ -3,7 +3,8 @@ from . import main
 from .forms import RegistrationForm, LoginForm, UpdateProfile
 from ..models import User,Pitch
 from .. import db, photos
-from flask_login import login_user,login_required, logout_user
+from flask_login import login_user,login_required, logout_user, current_user
+
 
 
 
@@ -75,7 +76,7 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
-    
+
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
@@ -86,6 +87,8 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+    
+
 
 
 
