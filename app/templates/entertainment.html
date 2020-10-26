@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block content %}
+
+{% for pitch in pitches %}
+<h1>{{pitch.category}}</h1>
+<p>{{pitch.title}}</p>
+<p>{{pitch.pitch_content}}</p>
+{% endfor %}
+{% endblock %}

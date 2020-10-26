@@ -61,9 +61,9 @@ class Pitch(db.Model):
         Pitch.all_pitches.clear()
 
 
-    def get_pitches(id):
+    def get_pitches(category):
 
-        pitches = Pitch.query.filter_by(category_id=id).all()
+        pitches = Pitch.query.filter_by(category=category).all()
 
       
         return pitches

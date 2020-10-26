@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, flash, redirect, abort
+from flask import Flask, render_template, url_for, flash, redirect, abort, request
 from . import main
 from .forms import RegistrationForm, LoginForm, UpdateProfile, PitchForm
 from ..models import User,Pitch
@@ -42,11 +42,11 @@ def new_pitch():
     form = PitchForm()
     if form.validate_on_submit():
         title = form.title.data
-        pitch_content = form.post.data
+        pitch_content = form.pitch_content.data
         category = form.category.data
         user_id = current_user
         new_pitch_item = Pitch(pitch_content=pitch_content,user_id=current_user._get_current_object().id,category=category,title=title)
-        new_pitch_item.save_pitch()
+        new_pitch_item.append_pitch()
         return redirect(url_for('main.home'))
         
     return render_template('pitch.html', form = form)
@@ -103,6 +103,22 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+
+@main.route('/category/entertainment', methods=['POST','GET'])
+def display_entertainment():
+    pitches = Pitch.get_pitches('Entertainment')
+    return render_template('entertainment.html',pitches=pitches)
+
+@main.route('/category/pickuplines', methods=['POST','GET'])
+def display_pickuplines():
+    pitches = Pitch.get_pitches('PickupLines')
+    return render_template('pickuplines.html',pitches=pitches)
+
+@main.route('/category/advertisement', methods=['POST','GET'])
+def display_advertisement():
+    pitches = Pitch.get_pitches('Advertisement')
+    return render_template('advertisement.html',pitches=pitches)
     
 
 
