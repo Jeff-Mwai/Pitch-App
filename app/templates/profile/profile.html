@@ -36,5 +36,41 @@
   </div>
   </div>
   </div>
+  <h3>My Pitches</h3>
+
+  {% for pitch in pitches %}
+
+<div class="card card-cascade wider mt-5">
+    <div class="card-body card-body-cascade text-center">
+
+        <!-- Title -->
+        <h4 class="card-title"><strong>{{pitch.title}}</strong></h4>
+        <!-- Subtitle -->
+        <h6 class="font-weight-bold indigo-text py-2">{{pitch.pitch_content}}</h6>
+        <!-- Text -->
+
+        <!-- Comment button -->
+        <a href="/comment/{{pitch.id}}"><button type=" button" class="btn btn-primary">Comment</button></a>
+        {% for category in allPitches %}
+
+         <!--Like Button-->
+        <span class="foot"> <a href="{{url_for('main.like',id = category.id)}}">
+                <button type=" button" class="btn btn-primary">Like</button>
+            </a> {{category.like.count()}}</span>
+
+            <!--Dislike Button-->
+
+         <span class="foot"> <a href="{{url_for('main.dislike',id = category.id)}}">
+                <button type=" button" class="btn btn-danger">DisLike</button>
+            </a> {{category.dislike.count()}}</span>
+
+        {%endfor%}
+         {%endfor%}
+
+    </div>
+</div>
+
+
+  
 
 {% endblock %}

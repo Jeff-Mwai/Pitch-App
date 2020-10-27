@@ -63,11 +63,11 @@ def login():
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
-
+    pitches = Pitch.query.filter_by(user_id = user.id).all()
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    return render_template("profile/profile.html", user = user,pitches = pitches)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -117,19 +117,21 @@ def comment(pitch_id):
 
 @main.route('/category/entertainment', methods=['POST','GET'])
 def display_entertainment():
-    allPitches = Pitch.query.all()
+    allPitches = Pitch.query.filter_by(category = 'Entertainment').all()
     pitches = Pitch.get_pitches('Entertainment')
     return render_template('entertainment.html',pitches=pitches,allPitches = allPitches)
 
 @main.route('/category/pickuplines', methods=['POST','GET'])
 def display_pickuplines():
+    allPitches = Pitch.query.filter_by(category = 'PickupLines').first()
     pitches = Pitch.get_pitches('PickupLines')
-    return render_template('pickuplines.html',pitches=pitches)
+    return render_template('pickuplines.html',pitches=pitches, allPitches = allPitches)
 
 @main.route('/category/advertisement', methods=['POST','GET'])
 def display_advertisement():
+    allPitches = Pitch.query.filter_by(category = 'Advertisement').all()
     pitches = Pitch.get_pitches('Advertisement')
-    return render_template('advertisement.html',pitches=pitches)
+    return render_template('advertisement.html',pitches=pitches, allPitches = allPitches)
     
 
 @main.route('/like/<int:id>',methods = ['POST','GET'])

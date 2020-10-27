@@ -130,7 +130,7 @@ class Dislikes(db.Model):
         db.session.commit()
     @classmethod
     def get_dislikes(cls,id):
-        dislike = Dislike.query.filter_by(pitch_id=id).all()
+        dislike = Dislikes.query.filter_by(pitch_id=id).all()
         return dislike
 
     def __repr__(self):
