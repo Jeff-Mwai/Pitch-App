@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, flash, redirect, abort, request
 from . import main
 from .forms import RegistrationForm, LoginForm, UpdateProfile, PitchForm, CommentForm
-from ..models import User,Pitch, Comment
+from ..models import User,Pitch, Comment, Likes, Dislikes
 from .. import db, photos
 from flask_login import login_user,login_required, logout_user, current_user
 
@@ -117,8 +117,9 @@ def comment(pitch_id):
 
 @main.route('/category/entertainment', methods=['POST','GET'])
 def display_entertainment():
+    allPitches = Pitch.query.all()
     pitches = Pitch.get_pitches('Entertainment')
-    return render_template('entertainment.html',pitches=pitches)
+    return render_template('entertainment.html',pitches=pitches,allPitches = allPitches)
 
 @main.route('/category/pickuplines', methods=['POST','GET'])
 def display_pickuplines():
@@ -134,7 +135,7 @@ def display_advertisement():
 @main.route('/like/<int:id>',methods = ['POST','GET'])
 @login_required
 def like(id):
-    get_pitches = Likes.get_upvotes(id)
+    get_pitches = Likes.get_likes(id)
     valid_string = f'{current_user.id}:{id}'
     for pitch in get_pitches:
         to_str = f'{pitch}'
