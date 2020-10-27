@@ -15,6 +15,7 @@
 
         <!-- Comment button -->
         <a href="/comment/{{pitch.id}}"><button type=" button" class="btn btn-primary">Comment</button></a>
+        <span class="foot" > <a href="{{url_for('main.like',id = id)}}"><i class="fa fa-thumbs-up" style="font-size:18px;color: green"></i></a> {{category.upvote.count()}}</span>
         <button type=" button" class="btn btn-primary">Like</button>
             <!-- Dislike Button -->
             <button type="button" class="btn btn-danger">Dislike</button>

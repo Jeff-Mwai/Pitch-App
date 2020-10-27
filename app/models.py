@@ -88,3 +88,45 @@ class Comment(db.Model):
     
     def __repr__(self):
         return f'comment:{self.comment}'
+
+class Likes(db.Model):
+    __tablename__ = 'likes'
+
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_likes(cls,id):
+        like = Likes.query.filter_by(pitch_id=id).all()
+        return like
+
+
+    def __repr__(self):
+        return f'{self.user_id}:{self.pitch_id}'
+class Dislikes(db.Model):
+    __tablename__ = 'dislikes'
+
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+    @classmethod
+    def get_dislikes(cls,id):
+        dislike = Dislike.query.filter_by(pitch_id=id).all()
+        return dislike
+
+    def __repr__(self):
+        return f'{self.user_id}:{self.pitch_id}'
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
