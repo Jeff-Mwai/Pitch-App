@@ -117,7 +117,7 @@ def comment(pitch_id):
 
 @main.route('/category/entertainment', methods=['POST','GET'])
 def display_entertainment():
-    allPitches = Pitch.query.filter_by(category = 'Entertainment').all()
+    allPitches = Pitch.query.filter_by(category = 'PickupLines').first()
     pitches = Pitch.get_pitches('Entertainment')
     return render_template('entertainment.html',pitches=pitches,allPitches = allPitches)
 
@@ -129,7 +129,7 @@ def display_pickuplines():
 
 @main.route('/category/advertisement', methods=['POST','GET'])
 def display_advertisement():
-    allPitches = Pitch.query.filter_by(category = 'Advertisement').all()
+    allPitches = Pitch.query.filter_by(category = 'PickupLines').first()
     pitches = Pitch.get_pitches('Advertisement')
     return render_template('advertisement.html',pitches=pitches, allPitches = allPitches)
     

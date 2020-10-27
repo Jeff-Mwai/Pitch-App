@@ -14,7 +14,8 @@
         <!-- Text -->
 
         <!-- Comment button -->
-        <a href="/comment/{{pitch.id}}"><button type=" button" class="btn btn-primary">Comment</button></a>
+        <span class="foot"><a href="/comment/{{pitch.id}}"><button type=" button" class="btn btn-success">Comment</button>
+        </a>{{allPitches.like.count()}}</span>
 
          <!--Like Button-->
         <span class="foot"> <a href="{{url_for('main.like',id = allPitches.id)}}">
