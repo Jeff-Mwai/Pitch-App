@@ -18,8 +18,6 @@ photos = UploadSet('photos',IMAGES)
 def create_app(config_name):
     app = Flask(__name__)
 
-    
-
      #Initializing Flask Extensions
     bootstrap.init_app(app)
     db.init_app(app)
@@ -29,6 +27,8 @@ def create_app(config_name):
 
     #Creating the app configurations
     app.config.from_object(config_options[config_name])
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql+psycopg2://moringa:KingJeffa00*@localhost/pitches'
 
     # configure UploadSet
     configure_uploads(app,photos)
