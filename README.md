@@ -9,6 +9,9 @@ Pitch App is an application that is developed using flask, and its main aim is t
 ## Live Link
 [View Site](https://pitches2020.herokuapp.com/)
 
+## Figma Link
+https://www.figma.com/file/y4fss7Vj4mN7N5RjsUjnqQ/Pitches?node-id=0%3A1
+
 ## User Story
 
 * Register and login users.
@@ -26,10 +29,6 @@ Pitch App is an application that is developed using flask, and its main aim is t
 | Select Login | **Email** and **password** | Redirect to home where one can choose between the different pitch categories|
 | Select comment button | **Comment** | The user inputs a comment|
 | Click on comment |  | Redirect to all comments tamplate with your comment and other comments|
-
-
-
-
 
 ## Development Installation
 To get the code..

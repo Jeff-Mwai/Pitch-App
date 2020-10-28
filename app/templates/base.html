@@ -7,10 +7,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap" rel="stylesheet">
 
 </head>
 
-<body>
+<body style="height: 1000px;">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary text-light">
         <a class="navbar-brand text-light" href="#">PITCH APP</a>
@@ -68,7 +69,7 @@
 
                 {% block content %}{% endblock %}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-top: 70px;">
                 <div class="content-section">
                     <h3>View Pitches</h3>
                     <p class='text-muted'>You can view pitches below based on categories
@@ -88,6 +89,36 @@
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small unique-color-dark pt-4"
+        style=" position: static; left: 0; bottom: 0; width: 100%; margin-top: 370px;">
+
+        <!-- Footer Elements -->
+        <div class="container">
+
+            <!-- Call to action -->
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <h5 class="mb-1">Create new pitch!</h5>
+                </li>
+                <li class="list-inline-item">
+                    <a href="{{ url_for('main.new_pitch') }}" class="btn btn-outline-white btn-rounded">New Pitch!</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
+
+        </div>
+        <!-- Footer Elements -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> Jeffrey Mwai</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
 
 
 

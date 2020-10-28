@@ -1,6 +1,37 @@
 {% extends 'base.html'%}
 
 {% block content %}
+  <div class="jumbotron hjumbo" style="font-family: 'Merienda', cursive; color: rgb(139,0,0);">
+        <div class="overlay">
+            <h1 class="txt text-center text-bold text-unique">PITCH APP</h1>
+        </div>
+    </div>
+    <div class="my-pitches mb-5 pt-3"
+    style="box-shadow: 0 7px 8px 0 rgba(0,0,0,0.8), 0 10px 10px 0 rgba(0,0,0,0.8); margin-top: 10px; margin: 10px; font-family: 'Merienda', cursive;">
+    <h3 class="text-center">Pickup Lines Pitches</h3>
+    <hr>
+    <p class="text-center">These days, guys need to be pretty creative when approaching a girl, since it is no longer enough to knock her down with a bat and to drag her into a cave. The thing is that expectations grow in every field of life, so it is no wonder that new ways of flirting are also required. This is where creativity takes the stage, and where only the best, or the craziest, are applauded. Thus, given a chance, use the best pickup lines to gain her attention.</p>
+     <a class="btn btn-unique text-white" href="{{ url_for('main.display_pickuplines') }}">Go to Pickup Line Pitches</a>
+</div>
+
+    <div class="my-pitches mb-5 pt-3"
+    style="box-shadow: 0 7px 8px 0 rgba(0,0,0,0.8), 0 10px 10px 0 rgba(0,0,0,0.8); margin-top: 10px; margin: 10px; font-family: 'Merienda', cursive;">
+    <h3 class="text-center">Entertainment Pitches</h3>
+    <hr>
+    <p class="text-center">People need to enjoy regardless of the circumstances that they face. There, entertainment is one of the many ways that bring enjoyment. Entertainment can range from recreational activities, watching televisions, playing video games, dancing, and acting. In fact, entertainment goes to the extent of storytelling and hunting and war. In fact, Walt Disney ones said that he would rather entertain and hope that people learned something than educate people and hope they were entertained</p>
+     <a class="btn btn-unique text-white" href="{{ url_for('main.display_entertainment') }}">Go to Entertainment Pitches</a>
+</div>
+
+  <div class="my-pitches mb-5 pt-3"
+    style="box-shadow: 0 7px 8px 0 rgba(0,0,0,0.8), 0 10px 10px 0 rgba(0,0,0,0.8); margin-top: 10px; margin: 10px; font-family: 'Merienda', cursive;">
+    <h3 class="text-center">Advertisement Pitches</h3>
+    <hr>
+    <p class="text-center">Advertisements are written or visual messages dedicated to promoting a specific product, service, or campaign. Businesses can pay the owner of a channel or platform that reaches a similar audience to broadcast this message. Two of the biggest challenges in advertising are measuring the value of the advertisement and ensuring it resonates with the right people.</p>
+     <a class="btn btn-unique text-white" href="{{ url_for('main.display_advertisement') }}">Go to Advertisement Pitches</a>
+</div>
+
+
+
 
 
 {% endblock %}
